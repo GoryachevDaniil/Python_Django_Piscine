@@ -8,3 +8,7 @@ scripts existing in your pages.
 ## 2-st day:
 Today, we’ll embark on a journey to discover basics of the syntactics and
 semantics of Python.
+
+## 3-rd day:
+Today, you’re going to conquer Silicon Valley with your newly acquired
+skills in POO with Python!
