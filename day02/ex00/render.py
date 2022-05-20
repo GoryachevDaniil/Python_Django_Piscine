@@ -1,7 +1,7 @@
-import sys, os, re
+import sys, os, re, settings
 
-def changer(file):
-    print(file)
+def changer(data):
+    return re.sub(r'{(\w*)}', lambda x: getattr(settings, x.group(1)), data)
 
 def error_check(args):
     if len(args) != 2:
@@ -16,7 +16,11 @@ def render():
     args = sys.argv
     if error_check(args)[1] == False:
         return
-    changer(args[1])
+    my_file = open(args[1], 'r')
+    data = my_file.read()
+    data = changer(data)
+    result_file = open('myCV.html', 'w')
+    result_file.write(data)
 
 if __name__ == '__main__':
     render()
