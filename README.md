@@ -12,3 +12,7 @@ semantics of Python.
 ## 3-rd day:
 Today, you’re going to conquer Silicon Valley with your newly acquired
 skills in POO with Python!
+
+## 4-th day:
+Today, we’re gonna learn how to handle some librairies that might come
+handy in Python.
