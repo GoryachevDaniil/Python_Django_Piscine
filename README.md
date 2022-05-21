@@ -19,3 +19,6 @@ handy in Python.
 
 ## 5-th day:
 After Python, Django!
+
+## Rush 00:
+Here is the subject for the rush00 of the piscine Python-Django.
