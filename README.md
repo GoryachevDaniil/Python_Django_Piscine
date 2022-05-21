@@ -16,3 +16,6 @@ skills in POO with Python!
 ## 4-th day:
 Today, we’re gonna learn how to handle some librairies that might come
 handy in Python.
+
+## 5-th day:
+After Python, Django!
