@@ -22,3 +22,6 @@ After Python, Django!
 
 ## Rush 00:
 Here is the subject for the rush00 of the piscine Python-Django.
+
+## 6-th day:
+Today, we’ll tackle the ORM of Django.
