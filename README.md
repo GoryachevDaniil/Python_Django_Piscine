@@ -25,3 +25,8 @@ Here is the subject for the rush00 of the piscine Python-Django.
 
 ## 6-th day:
 Today, we’ll tackle the ORM of Django.
+
+## 7-th day: Authentication and users.
+### "Life Pro Tips" site project.
+Or how a simple Django project can turn you into a black belt in permission
+and user management! (Version: 3)
