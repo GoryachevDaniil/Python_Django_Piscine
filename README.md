@@ -39,5 +39,5 @@ Or how a simple Django project can turn you into a black belt in permission
 and user management! (Version: 3)
 
 ## 8th day - Python-Django Training.
-## Django - Advanced.
+### Django - Advanced.
 Today, we will discover some of Django’s advanced functionalities. (Version: 3)
