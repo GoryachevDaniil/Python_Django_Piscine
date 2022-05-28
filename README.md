@@ -41,3 +41,11 @@ and user management! (Version: 3)
 ## 8th day - Python-Django Training.
 ### Django - Advanced.
 Today, we will discover some of Django’s advanced functionalities. (Version: 3)
+
+## 9th day - Setting production in motion.
+### Last step before completion!.
+Now your know how to design a Django project with all the features you can dream of. It’s time to share it with the world!
+
+## 10th day - Python-Django Training.
+### Django - Ajax - Websockets.
+Today, we’re gonna learn how to use AJAX and Websockets with Django.
