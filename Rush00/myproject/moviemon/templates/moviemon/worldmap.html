@@ -1,0 +1,47 @@
+{% extends "moviemon/base.html" %}
+
+{% block title %}
+Worldmap
+{% endblock %}
+
+{% block content %}
+ <div class="waviy" style="background-color: #D6EEEE; text-align: center; font-size: 20px;">
+   <span style="--i:1">W</span>
+   <span style="--i:2">o</span>
+   <span style="--i:3">r</span>
+   <span style="--i:4">l</span>
+   <span style="--i:5">d</span>
+   <span style="--i:6">m</span>
+  <span style="--i:7">a</span>
+   <span style="--i:8">p</span>
+
+  </div>
+<p style="background-color: #D6EEEE; text-align: center; font-size: 20px; color: #7a00ff">movieball : {{ball_count}}
+{% if ball_got == True %}
+I got a MovieBall
+{% elif movie_got == True %}
+I got a MovieMonster
+{% endif %}
+</p>
+<table style="border: 2px solid #fff; background-color: #d0eed0; table-layout:
+fixed; margin-left:auto; margin-right:auto; ">
+  {% for y in map_size_y %}
+  <tr>
+    {% for x in map_size_x %}
+    <td style="height: 50px; width: 50px; border: 2px solid #fff; text-align: center;">
+    {% if my_location_x == x and my_location_y == y and ball_got == True %}
+    my
+    (ball)
+    {% elif my_location_x == x and my_location_y == y and movie_got == True %}
+    my
+    (MV)
+    {% elif my_location_x == x and my_location_y == y %}
+    my
+    {% endif %}
+    </td>
+    {% endfor %}
+  </tr>
+  {% endfor %}
+</table>
+<p style="background-color: #D6EEEE; text-align: center">A - Battle | Start - Option | Select - Moviedex</p>
+{% endblock %}

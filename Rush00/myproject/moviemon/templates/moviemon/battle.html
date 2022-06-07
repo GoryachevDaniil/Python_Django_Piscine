@@ -1,0 +1,33 @@
+{% extends "moviemon/base.html" %}
+
+{% block title %}
+Battle
+{% endblock %}
+
+{% block content %}
+<div align="center">
+  <div>
+<h2>Battle</h2>
+    <table style="width:50%; align: center; background-color: #D6EEEE">
+  <tr>
+    <th>Rest of Balls</th>
+    <th>Player strength</th>
+    <th>Movie strength</th>
+    <th>Capture Rate</th>
+  </tr>
+  <tr>
+    <td>{{balls}}</td>
+    <td>{{player_strength}}</td>
+    <td>{{movie_strength}}</td>
+    <td>{{rate}}%</td>
+  </tr>
+</table>
+</div>
+  <img src="{{image}}" />
+  <p style="font-size: 20px;"><b>{{title}}</b></p>
+  <p style="font-size: 20px;">{{imdbRating}}</p>
+  <p style="font-size: 20px;">{{mention_A}}</p>
+  <p style="font-size: 20px;">B - back to Worldmap</p>
+  <p style="font-size: 20px;">{{mention_C}}</p>
+</div >
+{% endblock %}
