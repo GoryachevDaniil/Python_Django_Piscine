@@ -1,0 +1,278 @@
+{% extends "ex01/base.html" %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style2.css' %}">
+{% endblock %}
+{% block title %}
+    <title>Ex01: Template engine.</title>
+{% endblock %}
+{% block content %}
+{% include "ex01/nav.html" %}
+<div>
+    <p>
+        A Django template is a text document or a Python string marked-up using the
+        Django template language. Some constructs are recognized and interpreted by the
+        template engine. The main ones are variables and tags.
+    </p>
+    <p>
+        A template is rendered with a context. Rendering replaces variables with their
+        values, which are looked up in the context, and executes tags. Everything else
+        is output as is.
+    </p>
+    <div class="section" id="s-variables">
+        <h4>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h4>
+        <p>
+            A variable outputs a value from the context, which is a dict-like object
+            mapping keys to values.
+        </p>
+        <p>
+            Variables are surrounded by
+            <code class="docutils literal notranslate">
+                <span class="pre">{{</span>
+            </code> and
+            <code class="docutils literal notranslate">
+                <span class="pre">}}</span>
+            </code> like this:
+        </p>
+        <div class="highlight-html+django notranslate">
+            <div class="highlight">
+                <pre>
+                    <span></span>
+                    My first name is
+                    <span class="cp">{{</span>
+                    <span class="nv">first_name</span>
+                    <span class="cp">}}</span>. My last name is
+                    <span class="cp">{{</span>
+                    <span class="nv">last_name</span>
+                    <span class="cp">}}</span>.
+                </pre>
+            </div>
+        </div>
+        <p>
+            With a context of <code class="docutils literal notranslate">
+            <span class="pre">{'first_name':</span>
+            <span class="pre">'John',</span>
+            <span class="pre">'last_name':</span>
+            <span class="pre">'Doe'}</span></code>, this template
+            renders to:
+        </p>
+        <div class="highlight-html+django notranslate">
+            <div class="highlight"><pre><span></span>My first name is John. My last name is Doe.</pre>
+            </div>
+        </div>
+        <p>
+            Dictionary lookup, attribute lookup and list-index lookups are implemented with a dot notation:
+        </p>
+        <div class="highlight-html+django notranslate">
+            <div class="highlight"><pre>
+                <span></span>
+                <span class="cp">{{</span>
+                <span class="nv">my_dict.key</span>
+                <span class="cp">}}</span>
+                <span class="cp">{{</span>
+                <span class="nv">my_object.attribute</span>
+                <span class="cp">}}</span>
+                <span class="cp">{{</span>
+                <span class="nv">my_list.0</span>
+                <span class="cp">}}</span></pre>
+            </div>
+        </div>
+        <p>
+            If a variable resolves to a callable, the template system will call it with no
+            arguments and use its result instead of the callable.
+        </p>
+    </div>
+    <div class="section" id="s-for">
+        <span id="s-std:templatetag-for"></span>
+        <span id="for"></span>
+        <span id="std:templatetag-for"></span>
+        <h3>
+            <code class="docutils literal notranslate">
+            <span class="pre">for</span></code>
+            <a class="headerlink" href="#for" title="Permalink to this headline">¶</a>
+        </h3>
+        <p>
+            Loops over each item in an array, making the item available in a context
+            variable. For example, to display a list of athletes provided in
+            <code class="docutils literal notranslate"><span class="pre">athlete_list</span></code>:
+        </p>
+        <div class="highlight-html+django notranslate">
+            <div class="highlight"><pre>
+                <span></span>
+                <span class="p">&lt;</span>
+                <span class="nt">ul</span><span class="p">&gt;</span>
+                <span class="cp">{%</span>
+                <span class="k">for</span>
+                <span class="nv">athlete</span>
+                <span class="k">in</span>
+                <span class="nv">athlete_list</span>
+                <span class="cp">%}</span>
+                <span class="p">&lt;</span>
+                <span class="nt">li</span>
+                <span class="p">&gt;</span>
+                <span class="cp">{{</span>
+                <span class="nv">athlete.name</span>
+                <span class="cp">}}</span>
+                <span class="p">&lt;/</span>
+                <span class="nt">li</span>
+                <span class="p">&gt;</span>
+                <span class="cp">{%</span>
+                <span class="k">endfor</span>
+                <span class="cp">%}</span>
+                <span class="p">&lt;/</span>
+                <span class="nt">ul</span>
+                <span class="p">&gt;</span></pre>
+            </div>
+        </div>
+        <p>
+            You can loop over a list in reverse by using
+            <code class="docutils literal notranslate">
+                <span class="pre">{%</span>
+                <span class="pre">for</span>
+                <span class="pre">obj</span>
+                <span class="pre">in</span>
+                <span class="pre">list</span>
+                <span class="pre">reversed</span>
+                <span class="pre">%}</span>
+            </code>.
+        </p>
+        <p>
+            If you need to loop over a list of lists, you can unpack the values
+            in each sublist into individual variables. For example, if your context
+            contains a list of (x,y) coordinates called <code class="docutils literal notranslate">
+            <span class="pre">points</span></code>, you could use the
+            following to output the list of points:
+        </p>
+        <div class="highlight-html+django notranslate">
+            <div class="highlight"><pre><span></span>
+                <span class="cp">{%</span>
+                <span class="k">for</span>
+                <span class="nv">x</span>
+                <span class="o">,</span>
+                <span class="nv">y</span>
+                <span class="k">in</span>
+                <span class="nv">points</span>
+                <span class="cp">%}</span>
+                There is a point at <span class="cp">{{</span>
+                <span class="nv">x</span>
+                <span class="cp">}}</span>,
+                <span class="cp">{{</span>
+                <span class="nv">y</span>
+                <span class="cp">}}</span>
+                <span class="cp">{%</span>
+                <span class="k">endfor</span>
+                <span class="cp">%}</span></pre>
+            </div>
+        </div>
+        <p>
+            This can also be useful if you need to access the items in a dictionary.
+            For example, if your context contained a dictionary
+            <code class="docutils literal notranslate"><span class="pre">data</span></code>, the following
+            would display the keys and values of the dictionary:
+        </p>
+        <div class="highlight-html+django notranslate">
+            <div class="highlight"><pre>
+                <span></span><span class="cp">{%</span>
+                <span class="k">for</span>
+                <span class="nv">key</span>
+                <span class="o">,</span>
+                <span class="nv">value</span>
+                <span class="k">in</span>
+                <span class="nv">data.items</span>
+                <span class="cp">%}</span>
+                <span class="cp">{{</span>
+                <span class="nv">key</span>
+                <span class="cp">}}</span>:
+                <span class="cp">{{</span>
+                <span class="nv">value</span>
+                <span class="cp">}}</span>
+                <span class="cp">{%</span>
+                <span class="k">endfor</span>
+                <span class="cp">%}</span></pre>
+            </div>
+        </div>
+        <p>
+            Keep in mind that for the dot operator, dictionary key lookup takes precedence
+            over method lookup. Therefore if the
+            <code class="docutils literal notranslate">
+                <span class="pre">data</span>
+            </code> dictionary contains a key named
+            <code class="docutils literal notranslate">
+                <span class="pre">'items'</span>
+            </code>,
+            <code class="docutils literal notranslate">
+                <span class="pre">data.items</span>
+            </code> will return
+            <code class="docutils literal notranslate">
+                <span class="pre">data['items']</span>
+            </code> instead of
+            <code class="docutils literal notranslate">
+                <span class="pre">data.items()</span>
+            </code>
+        </p>
+    </div>
+    <div class="section" id="s-if">
+        <span id="s-std:templatetag-if"></span>
+        <span id="if"></span>
+        <span id="std:templatetag-if"></span>
+        <h3>
+            <code class="docutils literal notranslate">
+            <span class="pre">if</span></code><a class="headerlink" href="#if" title="Permalink to this headline">¶</a>
+        </h3>
+        <p>
+            The <code class="docutils literal notranslate">
+            <span class="pre">{%</span>
+            <span class="pre">if</span>
+            <span class="pre">%}</span></code> tag evaluates a variable, and if that variable is “true” (i.e.
+            exists, is not empty, and is not a false boolean value) the contents of the
+            block are output:
+        </p>
+        <div class="highlight-html+django notranslate">
+            <div class="highlight"><pre>
+                <span></span><span class="cp">{%</span>
+                <span class="k">if</span>
+                <span class="nv">athlete_list</span>
+                <span class="cp">%}</span>
+                Number of athletes:
+                <span class="cp">{{</span>
+                <span class="nv">athlete_list</span>
+                <span class="o">|</span>
+                <span class="nf">length</span>
+                <span class="cp">}}</span>
+                <span class="cp">{%</span>
+                <span class="k">elif</span>
+                <span class="nv">athlete_in_locker_room_list</span>
+                <span class="cp">%}</span>
+                Athletes should be out of the locker room soon!
+                <span class="cp">{%</span>
+                <span class="k">else</span>
+                <span class="cp">%}</span>
+                No athletes.
+                <span class="cp">{%</span>
+                <span class="k">endif</span>
+                <span class="cp">%}</span></pre>
+            </div>
+        </div>
+        <p>
+            In the above, if <code class="docutils literal notranslate">
+            <span class="pre">athlete_list</span></code> is not empty, the number of athletes will be
+            displayed by the <code class="docutils literal notranslate">
+            <span class="pre">{{</span>
+            <span class="pre">athlete_list|length</span>
+            <span class="pre">}}</span></code> variable.
+        </p>
+        <p>
+            As you can see, the <code class="docutils literal notranslate">
+            <span class="pre">if</span></code> tag may take one or several
+            <code class="docutils literal notranslate">
+                <span class="pre">{%</span>
+                <span class="pre">elif</span> <span class="pre">%}</span>
+            </code>
+            clauses, as well as an <code class="docutils literal notranslate">
+            <span class="pre">{%</span> <span class="pre">else</span>
+            <span class="pre">%}</span></code> clause that will be displayed if all
+            previous conditions fail. These clauses are optional.
+        </p>
+    </div>
+</div>
+{% endblock %}
